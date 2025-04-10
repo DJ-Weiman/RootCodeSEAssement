@@ -5,7 +5,10 @@ import jakarta.persistence.*;
 import java.util.UUID;
 
 @Entity
-@Table(name ="books")
+@Table(name ="books", indexes = {
+        @Index(name = "idx_author", columnList = "author, id, title"),
+        @Index(name = "idx_published_year", columnList = "published_year, id, title")
+})
 public class BookEntity {
 
     @Id

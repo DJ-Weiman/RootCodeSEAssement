@@ -6,7 +6,9 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
-@Table(name = "borrowing")
+@Table(name = "borrowing", indexes = {
+        @Index(name = "idx_user", columnList = "user_id, book_id")
+})
 public class BorrowingEntity {
 
     @Id
