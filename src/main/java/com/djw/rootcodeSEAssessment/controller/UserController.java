@@ -1,7 +1,10 @@
 package com.djw.rootcodeSEAssessment.controller;
 
+import com.djw.rootcodeSEAssessment.domain.dto.UserDto;
 import com.djw.rootcodeSEAssessment.domain.entities.UserEntity;
 import com.djw.rootcodeSEAssessment.services.UserService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,13 +20,15 @@ public class UserController {
     }
 
     @PostMapping()
-    public UserEntity createUser(@RequestBody UserEntity user){
-        return userService.createUser(user);
+    public ResponseEntity<UserDto> createUser(@RequestBody UserDto user){
+        UserDto savedUser = userService.createUser(user);
+        return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
     }
 
     @GetMapping
-    public List<UserEntity> getAllUsers(){
-        return userService.getAllUsers();
+    public ResponseEntity<List<UserDto>> getAllUsers(){
+        List<UserDto> savedUsers = userService.getAllUsers();
+        return new ResponseEntity<>(savedUsers, HttpStatus.OK);
     }
 
 }

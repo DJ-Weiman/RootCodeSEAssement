@@ -1,8 +1,11 @@
 package com.djw.rootcodeSEAssessment.services.impl;
 
+import com.djw.rootcodeSEAssessment.domain.dto.UserDto;
 import com.djw.rootcodeSEAssessment.domain.entities.UserEntity;
+import com.djw.rootcodeSEAssessment.mappers.Mapper;
 import com.djw.rootcodeSEAssessment.repositories.UserRepository;
 import com.djw.rootcodeSEAssessment.services.UserService;
+import org.apache.catalina.User;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -14,20 +17,26 @@ import java.util.stream.StreamSupport;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final Mapper<UserEntity, UserDto> userMapper;
 
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository, Mapper<UserEntity, UserDto> userMapper) {
         this.userRepository = userRepository;
+        this.userMapper = userMapper;
     }
 
     @Override
-    public UserEntity createUser(UserEntity user) {
-        user.setCreated_at(LocalDateTime.now());
-        return userRepository.save(user);
+    public UserDto createUser(UserDto userDto) {
+        userDto.setCreated_at(LocalDateTime.now());
+        UserEntity savedUser = userRepository.save(userMapper.mapFrom(userDto));
+
+        return userMapper.mapTo(savedUser);
     }
 
     @Override
-    public List<UserEntity> getAllUsers() {
-        return StreamSupport.stream(userRepository.findAll().spliterator(), false)
+    public List<UserDto> getAllUsers() {
+        return StreamSupport
+                .stream(userRepository.findAll().spliterator(), false)
+                .map(userMapper::mapTo)
                 .collect(Collectors.toList());
     }
 }

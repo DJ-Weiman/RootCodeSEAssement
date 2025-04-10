@@ -1,5 +1,6 @@
 package com.djw.rootcodeSEAssessment.services;
 
+import com.djw.rootcodeSEAssessment.domain.dto.UserDto;
 import com.djw.rootcodeSEAssessment.domain.entities.UserEntity;
 import org.springframework.stereotype.Service;
 
@@ -7,8 +8,8 @@ import java.util.List;
 
 public interface UserService {
 
-    UserEntity createUser(UserEntity user);
+    UserDto createUser(UserDto user);
 
-    List<UserEntity> getAllUsers();
+    List<UserDto> getAllUsers();
 
 }
