@@ -5,7 +5,6 @@ import com.djw.rootcodeSEAssessment.domain.entities.UserEntity;
 import com.djw.rootcodeSEAssessment.mappers.Mapper;
 import com.djw.rootcodeSEAssessment.repositories.UserRepository;
 import com.djw.rootcodeSEAssessment.services.UserService;
-import org.apache.catalina.User;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
