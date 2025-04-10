@@ -5,6 +5,8 @@ import com.djw.rootcodeSEAssessment.domain.entities.BookEntity;
 import com.djw.rootcodeSEAssessment.mappers.Mapper;
 import com.djw.rootcodeSEAssessment.repositories.BookRepository;
 import com.djw.rootcodeSEAssessment.services.BookService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.awt.print.Book;
@@ -38,6 +40,12 @@ public class BookServiceImpl implements BookService {
                 .stream(allBooksIterable.spliterator(), false)
                 .map(bookMapper::mapTo)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Page<BookDto> findAll(Pageable pageable) {
+        Page<BookEntity> allBooksPage = bookRepository.findAll(pageable);
+        return allBooksPage.map(bookMapper::mapTo);
     }
 
     @Override

@@ -3,6 +3,8 @@ package com.djw.rootcodeSEAssessment.controller;
 import com.djw.rootcodeSEAssessment.domain.dto.BookDto;
 import com.djw.rootcodeSEAssessment.domain.dto.UserDto;
 import com.djw.rootcodeSEAssessment.services.BookService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,9 +28,8 @@ public class BookController {
     }
 
     @GetMapping()
-    public ResponseEntity<List<BookDto>> getAllBooks(){
-        List<BookDto> booksByAuthor = bookService.getAllBooks();
-        return new ResponseEntity<>(booksByAuthor, HttpStatus.OK);
+    public Page<BookDto> getAllBooks(Pageable pageable){
+        return bookService.findAll(pageable);
     }
 
     @GetMapping(path = "/{authorName}")
