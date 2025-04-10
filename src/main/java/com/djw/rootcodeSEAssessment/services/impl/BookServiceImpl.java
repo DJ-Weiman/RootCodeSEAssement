@@ -39,4 +39,26 @@ public class BookServiceImpl implements BookService {
                 .map(bookMapper::mapTo)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public List<BookDto> getBooksByAuthor(String authorName) {
+        Iterable<BookEntity> booksByAuthorIterable = bookRepository.getBooksByAuthor(authorName);
+
+        return StreamSupport
+                .stream(booksByAuthorIterable.spliterator(), false)
+                .map(bookMapper::mapTo)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<BookDto> getBooksPublishedInYear(String publishedYear) {
+        Iterable<BookEntity> booksPublishedInYearIterable = bookRepository.getBooksPublishedInYear(publishedYear);
+
+        return StreamSupport
+                .stream(booksPublishedInYearIterable.spliterator(), false)
+                .map(bookMapper::mapTo)
+                .collect(Collectors.toList());
+    }
+
+
 }

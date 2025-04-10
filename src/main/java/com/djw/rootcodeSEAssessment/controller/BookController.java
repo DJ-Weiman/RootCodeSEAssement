@@ -30,4 +30,16 @@ public class BookController {
         List<BookDto> savedBooks = bookService.getAllAvailableBooks();
         return new ResponseEntity<>(savedBooks, HttpStatus.OK);
     }
+
+    @GetMapping(path = "/{authorName}")
+    public ResponseEntity<List<BookDto>> getBooksByAuthor(@PathVariable("authorName") String authorName){
+        List<BookDto> booksByAuthor = bookService.getBooksByAuthor(authorName);
+        return new ResponseEntity<>(booksByAuthor, HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/{publishedYear}")
+    public ResponseEntity<List<BookDto>> getBooksFromYear(@PathVariable("publishedYear") String publishedYear){
+        List<BookDto> booksFromPublishedYear = bookService.getBooksPublishedInYear(publishedYear);
+        return new ResponseEntity<>(booksFromPublishedYear, HttpStatus.OK);
+    }
 }
