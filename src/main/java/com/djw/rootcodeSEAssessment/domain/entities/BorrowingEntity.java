@@ -34,45 +34,7 @@ public class BorrowingEntity {
         this.returned_at = returned_at;
     }
 
-    public UUID getId() {
-        return id;
-    }
 
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public UUID getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(UUID user_id) {
-        this.user_id = user_id;
-    }
-
-    public UUID getBook_id() {
-        return book_id;
-    }
-
-    public void setBook_id(UUID book_id) {
-        this.book_id = book_id;
-    }
-
-    public LocalDateTime getBorrowed_at() {
-        return borrowed_at;
-    }
-
-    public void setBorrowed_at(LocalDateTime borrowed_at) {
-        this.borrowed_at = borrowed_at;
-    }
-
-    public LocalDateTime getReturned_at() {
-        return returned_at;
-    }
-
-    public void setReturned_at(LocalDateTime returned_at) {
-        this.returned_at = returned_at;
-    }
 
     @PreUpdate
     protected void onUpdate(){
