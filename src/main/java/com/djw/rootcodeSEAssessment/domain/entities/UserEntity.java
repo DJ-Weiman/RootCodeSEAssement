@@ -21,14 +21,17 @@ public class UserEntity {
     @Column(nullable = false)
     private LocalDateTime created_at;
 
+    private String userPassword;
+
     public UserEntity() {
     }
 
-    public UserEntity(UUID id, String name, String email, LocalDateTime created_at) {
+    public UserEntity(UUID id, String name, String email, LocalDateTime created_at, String userPassword) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.created_at = created_at;
+        this.userPassword = userPassword;
     }
 
     public UUID getId() {
@@ -68,4 +71,11 @@ public class UserEntity {
         this.created_at = LocalDateTime.now();
     }
 
+    public String getUserPassword() {
+        return userPassword;
+    }
+
+    public void setUserPassword(String userPassword) {
+        this.userPassword = userPassword;
+    }
 }

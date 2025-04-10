@@ -31,6 +31,16 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    public List<BookDto> getAllBooks() {
+        Iterable<BookEntity> allBooksIterable = bookRepository.findAll();
+
+        return StreamSupport
+                .stream(allBooksIterable.spliterator(), false)
+                .map(bookMapper::mapTo)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public List<BookDto> getAllAvailableBooks() {
         Iterable<BookEntity> availableBookIterable = bookRepository.findAvailableBooks();
 
